@@ -4,8 +4,11 @@ def spiral(starting_number, size)
   matrix[(size/2)][(size/2)] = path.pop
   matrix[(size/2)][(size/2 -1)] = path.pop
   matrix[0] = path.shift(size)
-  matrix
-  path
+  matrix[-1] = path.pop(size).reverse
+  matrix = matrix.each_with_index do |row, i|
+    row.each_with_index { |number, index| matrix[i][index] = path.shift if number == nil }
+  end
+  matrix.each {|row| puts row}
 end
 
 p spiral(1, 3)
